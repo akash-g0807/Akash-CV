@@ -46,7 +46,7 @@
 
           env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
             OSFONTDIR="${fonts}/share/fonts/truetype" \
-            SOURCE_DATE_EPOCH=$(date -d "2021-11-30" +%s) \
+            SOURCE_DATE_EPOCH=$(date -d "2025-01-07" +%s) \
             latexmk -interaction=nonstopmode -pdf -lualatex \
             -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
             -usepretex document.tex
