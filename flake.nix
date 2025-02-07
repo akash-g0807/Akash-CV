@@ -19,16 +19,16 @@
         buildInputs = [ pkgs.coreutils tex fonts pkgs.fira-code ];
 
         shellHook = ''
-          export OSFONTDIR="${fonts}/share/fonts/truetype"
-          export TEXMFHOME="$PWD/.cache"
-          export TEXMFVAR="$PWD/.cache/texmf-var"
-          
-          echo "Setting up Fontconfig..."
-          fc-cache -fv >/dev/null 2>&1
-          luaotfload-tool --update >/dev/null 2>&1        
- 
-          echo "Carlito should now be available in LuaLaTeX!"
-        '';
+  export OSFONTDIR="${pkgs.carlito}/share/fonts/truetype"
+  export TEXMFHOME="$PWD/.cache"
+  export TEXMFVAR="$PWD/.cache/texmf-var"
+
+  # Ensure Carlito is only cached, avoid system fonts
+  fc-cache -f "$OSFONTDIR" >/dev/null 2>&1
+  luaotfload-tool --update >/dev/null 2>&1
+
+  echo "Nix shell ready. Carlito font configured."
+'';
       };
       
       defaultPackage = pkgs.stdenvNoCC.mkDerivation rec {
